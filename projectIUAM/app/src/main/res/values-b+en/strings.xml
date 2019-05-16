@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">feelMe</string>
+    <string name="action_settings" translatable="true">Settings</string>
+</resources>
