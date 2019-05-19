@@ -1,65 +1,149 @@
 package com.hesso.feelme;
 
-import ai.api.model.*;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.*;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import ai.api.AIServiceException;
-import ai.api.RequestExtras;
 import ai.api.android.AIConfiguration;
-import ai.api.android.AIConfiguration.RecognitionEngine;
 import ai.api.android.AIDataService;
 import ai.api.android.GsonFactory;
+import ai.api.model.AIError;
+import ai.api.model.AIRequest;
+import ai.api.model.AIResponse;
+import ai.api.model.Metadata;
+import ai.api.model.Result;
+import ai.api.model.Status;
 
-
-public class ConversationActivity<queryString> extends BaseActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class ConversationActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
 
     public static final String TAG = ConversationActivity.class.getName();
+
     private Gson gson = GsonFactory.getGson();
+
     private TextView resultTextView;
+    private RecyclerView mRecyclerView;
+    //private EditText contextEditText;
     private EditText queryEditText;
+    private MessageAdapter mAdapter;
+    private TextView queryTextView;
+
+
 
 
     private AIDataService aiDataService;
-
+    private LinearLayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversation);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.messageList);
+        mLayoutManager = new LinearLayoutManager(this);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mRecyclerView.setHasFixedSize(true);
+
+
+
+
+        final ArrayList messages = new ArrayList<Message>();
+        // Create the initial data list
+        Message msg0 = new Message(
+                "Bot",
+                "hello",
+                Calendar.getInstance().getTimeInMillis());
+        messages.add(msg0);
+
+        mAdapter = new MessageAdapter(getApplicationContext(),messages);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.addMessage(msg0);
 
         resultTextView = (TextView) findViewById(R.id.txtBotMessage);
+        //contextEditText = (EditText) findViewById(R.id.contextEditText);
+        // contextEditText.setVisibility(View.INVISIBLE);
         queryEditText = (EditText) findViewById(R.id.txtMessage);
+        queryTextView = (TextView) findViewById(R.id.txtMyMessage);
+
+        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(this);
+
+        @Override
+        public void onClick(View v) {
+
+
+            if (R.id.fab==v.getId()) {
+                String msg = queryEditText.getText().toString();
+                if(!msg.equals("")) {
+
+                    Message chatMessage = new Message(
+                            "moi",
+                            msg,
+                            Calendar.getInstance().getTimeInMillis());
+                    //Add themessage to the list
+                   // messages.add(chatMessage);
+                    mAdapter.addMessage(chatMessage);
+                    int newMsgPosition = messages.size() - 1;
+
+                    // Notify recycler view insert one new data.
+                    mAdapter.notifyItemInserted(newMsgPosition);
+
+
+                    // Scroll RecyclerView to the last message.
+                    mRecyclerView.scrollToPosition(newMsgPosition);
+
+                    sendRequest();
+                    clearEditText();
+
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Message should not be empty", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+            }
+        }
+
+        });
+
+
+
+        //findViewById(R.id.buttonClear).setOnClickListener(this);
+
+
+
+       Spinner spinner = (Spinner) findViewById(R.id.selectLanguageSpinner);
+        final ArrayAdapter<LanguageConfig> languagesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, Config.languages);
+        spinner.setAdapter(languagesAdapter);
+        spinner.setOnItemSelectedListener(this);
+
     }
 
     private void initService(final LanguageConfig selectedLanguage) {
         final AIConfiguration.SupportedLanguages lang = AIConfiguration.SupportedLanguages.fromLanguageTag(selectedLanguage.getLanguageCode());
         final AIConfiguration config = new AIConfiguration(selectedLanguage.getAccessToken(),
                 lang,
-                RecognitionEngine.System);
+                AIConfiguration.RecognitionEngine.System);
 
 
         aiDataService = new AIDataService(this, config);
@@ -70,29 +154,44 @@ public class ConversationActivity<queryString> extends BaseActivity implements A
         queryEditText.setText("");
     }
 
-
-
+    /*
+     * AIRequest should have query OR event
+     */
     private void sendRequest() {
-        final String queryString = String.valueOf(queryEditText.getText());
-        if (TextUtils.isEmpty(queryString)){
-            onError(new AIError(getString(R.string.non_empty_query)));
-        return;
-         }
 
+        final String queryString = String.valueOf(queryEditText.getText());
+
+        Toast.makeText(getApplicationContext(), queryString, Toast.LENGTH_SHORT).show();
+
+// final String contextString = String.valueOf(contextEditText.getText());
+
+        if (TextUtils.isEmpty(queryString) ) {
+            onError(new AIError(getString(R.string.non_empty_query)));
+            return;
+        }
 
         final AsyncTask<String, Void, AIResponse> task = new AsyncTask<String, Void, AIResponse>() {
+
             private AIError aiError;
 
             @Override
             protected AIResponse doInBackground(final String... params) {
-                final AIRequest request = new AIRequest();
+                final  AIRequest request = new AIRequest();
                 String query = params[0];
+                //String event = params[1];
 
                 if (!TextUtils.isEmpty(query))
                     request.setQuery(query);
-                RequestExtras requestExtras = null; // When we get context we should put it here
+
+/*final String contextString = params[2];
+        RequestExtras requestExtras = null;
+        if (!TextUtils.isEmpty(contextString)) {
+final List<AIContext> contexts = Collections.singletonList(new AIContext(contextString));
+        requestExtras = new RequestExtras(contexts, null);
+        }*/
+
                 try {
-                    return aiDataService.request(request, requestExtras);
+                    return aiDataService.request(request);
                 } catch (final AIServiceException e) {
                     aiError = new AIError(e);
                     return null;
@@ -108,8 +207,11 @@ public class ConversationActivity<queryString> extends BaseActivity implements A
                 }
             }
         };
+
         task.execute(queryString);
     }
+
+
 
 
     private void onResult(final AIResponse response) {
@@ -118,11 +220,9 @@ public class ConversationActivity<queryString> extends BaseActivity implements A
             public void run() {
                 Log.d(TAG, "onResult");
 
-                resultTextView.setText(gson.toJson(response));
 
-                Log.i(TAG, "Received success response");
 
-                // this is example how to get different parts of result object
+// this is example how to get different parts of result object
                 final Status status = response.getStatus();
                 Log.i(TAG, "Status code: " + status.getCode());
                 Log.i(TAG, "Status type: " + status.getErrorType());
@@ -134,7 +234,7 @@ public class ConversationActivity<queryString> extends BaseActivity implements A
 
                 final String speech = result.getFulfillment().getSpeech();
                 Log.i(TAG, "Speech: " + speech);
-                // TTS.speak(speech);
+                //TTS.speak(speech);
 
                 final Metadata metadata = result.getMetadata();
                 if (metadata != null) {
@@ -149,10 +249,28 @@ public class ConversationActivity<queryString> extends BaseActivity implements A
                         Log.i(TAG, String.format("%s: %s", entry.getKey(), entry.getValue().toString()));
                     }
                 }
+
+                Message chatMessage = new Message(
+                        "Bot",
+                        speech,
+                        Calendar.getInstance().getTimeInMillis());
+                //Add themessage to the list
+                mAdapter.addMessage(chatMessage);
+                int newMsgPosition = mAdapter.getItemCount() - 1;
+
+                // Notify recycler view insert one new data.
+                mAdapter.notifyItemInserted(newMsgPosition);
+
+
+                // Scroll RecyclerView to the last message.
+                mRecyclerView.scrollToPosition(newMsgPosition);
+
+
             }
 
         });
     }
+
 
     private void onError(final AIError error) {
         runOnUiThread(new Runnable() {
@@ -164,11 +282,11 @@ public class ConversationActivity<queryString> extends BaseActivity implements A
     }
 
 
-
-
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
+       // getMenuInflater().inflate(R.menu.menu_aibutton_sample, menu);
         getMenuInflater().inflate(R.menu.menu_main, menu); //TO CHECK
+
         return true;
     }
 
@@ -176,9 +294,9 @@ public class ConversationActivity<queryString> extends BaseActivity implements A
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int id = item.getItemId();
 
-            //noinspection SimplifiableIfStatement
+        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-               // startActivity(AISettingsActivity.class);
+           // startActivity(AISettingsActivity.class);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -190,21 +308,19 @@ public class ConversationActivity<queryString> extends BaseActivity implements A
     }
 
 
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        //final LanguageConfig selectedLanguage = (LanguageConfig) parent.getItemAtPosition(position);
-        //initService(selectedLanguage);
+        final LanguageConfig selectedLanguage = (LanguageConfig) parent.getItemAtPosition(position);
+        initService(selectedLanguage);
     }
+
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.fab) {
-            sendRequest();
-        }
 
-    }
+
+
 }
