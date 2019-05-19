@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.hesso.feelme">
+
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
     <application
             android:name=".FeelMeApp"
             android:allowBackup="true"
@@ -11,6 +13,12 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".PreferenceActivity">
+        </activity>
+        <activity android:name=".ParamsActivity">
+        </activity>
+        <activity android:name=".UserActivity">
+        </activity>
         <activity
                 android:name=".ConversationActivity"
                 android:theme="@style/AppTheme.NoActionBar">

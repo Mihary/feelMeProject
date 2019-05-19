@@ -2,5 +2,23 @@
     <string name="app_name">feelMe</string>
     <string name="action_settings" translatable="true">Parametres</string>
     <string name="non_empty_query" translatable="true">Veillez saisir votre texte</string>
-
+    <string name="MessageVocalGuide">Veuillez parler...</string>
+    <string name="btn_send">Envoyer</string>
+    <string name="btn_speak">Parler</string>
+    <string name="btn_preference">Preference</string>
+    <string name="btn_user">Utilisateur</string>
+    <string name="btn_Notification">Notification</string>
+    <string name="btn_feelMe">Feelme</string>
+    <string name="btn_preCancel">Annuler</string>
+    <string name="btn_userSave">Enregister</string>
+    <string name="label_params">Parametres</string>
+    <string name="message_no_connexion">Pas de connexion</string>
+    <string name="message_connexion">Connexion etablie</string>
+    <string name="tapeMessage">Taper votre message...</string>
+    <string name="hintuserName">Name</string>
+    <string name="hintUserSex">Sexe</string>
+    <string name="hintUserEmail">Email</string>
+    <string name="hintUserAge">Age</string>
+    <string name="titlePersonalInfo">Information Personnelle</string>
 </resources>
+

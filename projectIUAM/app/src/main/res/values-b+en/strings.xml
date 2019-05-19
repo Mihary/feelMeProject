@@ -1,4 +1,23 @@
 <resources>
     <string name="app_name">feelMe</string>
     <string name="action_settings" translatable="true">Settings</string>
+    <string name="non_empty_query" translatable="true">Tape your text, please.</string>
+    <string name="MessageVocalGuide">Speak please...</string>
+    <string name="btn_send">Send</string>
+    <string name="btn_speak">Speak</string>
+    <string name="btn_preference">Preference</string>
+    <string name="btn_user">User</string>
+    <string name="btn_Notification">Notification</string>
+    <string name="btn_feelMe">Feelme</string>
+    <string name="btn_preCancel">Cancel</string>
+    <string name="btn_userSave">Save</string>
+    <string name="label_params">Parametres</string>
+    <string name="message_no_connexion">Connection not available</string>
+    <string name="message_connexion">Connection established</string>
+    <string name="tapeMessage">Tape your message...</string>
+    <string name="hintuserName">Name</string>
+    <string name="hintUserSex">Sex</string>
+    <string name="hintUserEmail">Email</string>
+    <string name="hintUserAge">Age</string>
+    <string name="titlePersonalInfo">Personal Information</string>
 </resources>
