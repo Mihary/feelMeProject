@@ -24,7 +24,11 @@ public abstract class Config {
     public static final String[] events = new String[]{
             "hello_event",
             "goodbye_event",
-            "how_are_you_event"
+            "how_are_you_event",
+            "conversation",
+            "intro_sante",
+            "Suggestion",
+            "Affinity"
     };
 }
 

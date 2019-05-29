@@ -1,5 +1,6 @@
 package com.hesso.feelme
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -14,14 +15,27 @@ import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        val confidState: String = getValueString("confid").toString()
+
         startFeel.setOnClickListener(){
-            val intent = Intent(this, ConversationActivity::class.java)
-            startActivity(intent);
+            val sharedPref = getSharedPreferences("feelMeData", Context.MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            val confidState: String = getValueString("confid").toString()
+            if(confidState=="OK"){
+//                Toast.makeText(this,confidState, Context.MODE_PRIVATE).show()
+                val intent = Intent(this, ConversationActivity::class.java)
+                startActivity(intent);
+            }else {
+                Toast.makeText(this,R.string.acceptCondition, Context.MODE_PRIVATE).show()
+                val intent = Intent(this, CCActivity::class.java)
+                startActivity(intent);
+            }
         }
     }
 
@@ -29,6 +43,13 @@ class MainActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
+    }
+
+    fun getValueString(KEY_NAME: String): String? {
+        val sharedPref = getSharedPreferences("feelMeData", Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        val ret : String? = sharedPref.getString(KEY_NAME, null)
+        return ret
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -39,7 +60,19 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> {
                 val intent = Intent(this, ParamsActivity::class.java)
                 startActivity(intent)
-                Toast.makeText(this, "parametres", Toast.LENGTH_LONG).show()
+//                Toast.makeText(this, "parametres", Toast.LENGTH_LONG).show()
+                true
+            }
+            R.id.action_confidentiality -> {
+                val intent = Intent(this, CCActivity::class.java)
+                startActivity(intent)
+//                Toast.makeText(this, "parametres", Toast.LENGTH_LONG).show()
+                true
+            }
+            R.id.action_about -> {
+                val intent = Intent(this, AboutActivity::class.java)
+                startActivity(intent)
+//                Toast.makeText(this, "parametres", Toast.LENGTH_LONG).show()
                 true
             }
             else -> super.onOptionsItemSelected(item)

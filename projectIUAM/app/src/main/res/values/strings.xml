@@ -20,5 +20,65 @@
     <string name="hintUserEmail">Email</string>
     <string name="hintUserAge">Age</string>
     <string name="titlePersonalInfo">Information Personnelle</string>
+    <string name="action_confidentiality">Confidentialité</string>
+
+
+    <string name="pref11">Normal</string>
+    <string name="pref12">Handicapé</string>
+    <string name="pref13">Sportif</string>
+    <string name="pref14">Enceinte</string>
+    <string name="pref15">Malade Mental</string>
+    <string name="pref16">Malade permanent</string>
+
+    <string name="pref21">Fais une partie de billard</string>
+    <string name="pref22">Fais une partie de babyfoot</string>
+    <string name="pref23">Fais une partie de ping pong</string>
+    <string name="pref24">Fais une partie de self workout</string>
+    <string name="pref25">Prend le livre et fais une lecture</string>
+
+    <string name="pref31">Vas faire une petite ballade</string>
+    <string name="pref32">Prendre un temps de reflexion au bord de l\'eau n\'est pas mal</string>
+    <string name="pref33">Vas au casino</string>
+    <string name="pref34">Vas au yoga</string>
+    <string name="pref35">Vas a l\'eglise</string>
+    <string name="pref36">Vas à la bibliothèque</string>
+
+    <string name="pref41">Va faire une partie de basket ball</string>
+    <string name="pref42">Va faire une partie de football</string>
+    <string name="pref43">Va faire une partie de volley ball</string>
+    <string name="pref44">Va faire une partie de handball</string>
+    <string name="pref45">Va faire une partie de natation</string>
+    <string name="pref46">Va faire une partie de tennis</string>
+    <string name="pref47">Va faire une partie de zumba</string>
+    <string name="pref48">Va faire une partie de rock</string>
+    <string name="pref49">Va faire une partie de drift</string>
+    <string name="pref40">Va faire une partie de karting</string>
+
+    <string name="pref51">Joues un peu a un jeu</string>
+    <string name="pref52">Essaie de trouver un jeu sur le net et fais une partie</string>
+    <string name="pref53">Vas lui parler et essai de trouver une bonne entente</string>
+
+    <string name="pref61">Bois un peu d\'eau</string>
+    <string name="pref62">Prends un peu d\'air</string>
+    <string name="pref63">Prends un peu de someil</string>
+    <string name="pref64">Prends un petit répos</string>
+    <string name="pref65">Va chez un docteur</string>
+    <string name="pref66">Vas au lit</string>
+    <string name="pref67">Fais la cuisine</string>
+    <string name="pref68">Essaie de parler avec les amis sur les réseaux sociaux</string>
+    <string name="pref69">Bois un peu de café</string>
+    <string name="pref60">Bois un peu de bière</string>
+    <string name="pref601">Bois un peu de whisky</string>
+    <string name="conditionTitle">Condition de manipulation des données personnels</string>
+    <string name="conditionSwitch">J\accepte</string>
+    <string name="action_about">Information sur l\'app</string>
+    <string name="nomDeBot">Nom d\'appelation de votre ami de conversation.</string>
+    <string name="acceptCondition">Accepter les condition pour parler.</string>
+    <string name="defaultMessage">Bonjour, je suis un ami fidele. N\hesite pas a donner ta confiance en moi.</string>
+    <string name="editMessageHint">Taper votre message</string>
+    <string name="noConnexion">Veuillez vous connecter sur internet</string>
+    <string name="conditionText">L\'application respecte bien votre vie privee. Aucune de vos données utilisées dans
+        l\'application n\'est stocke en dehors de votre appareil mobile.
+    </string>
 </resources>
 

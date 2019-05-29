@@ -1,6 +1,7 @@
 package com.hesso.feelme
 
 import android.content.Context
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +11,14 @@ import kotlinx.android.synthetic.main.bot_message.view.*
 import kotlinx.android.synthetic.main.user_message.view.*
 import java.text.SimpleDateFormat
 import java.util.*
+import android.content.SharedPreferences
+
+
 
 
 private const val VIEW_TYPE_MY_MESSAGE = 1
 private const val VIEW_TYPE_BOT_MESSAGE = 2
+
 
 object DateUtils {
     fun fromMillisToTimeString(millis: Long) : String {
@@ -22,10 +27,13 @@ object DateUtils {
     }
 }
 
+//fun getSharedPreferences(ctxt: Context): SharedPreferences {
+fun getSharedPreferences(ctxt: Context): SharedPreferences {
+    val usname = ctxt.getSharedPreferences("feelMeData", 0)
+    return usname
+}
+
 class MessageAdapter (private val context: Context, messages: ArrayList<Any>):RecyclerView.Adapter<MessageViewHolder>(){
-
-
-
 
 
     private val messages: ArrayList<Message> = ArrayList()
@@ -44,7 +52,9 @@ class MessageAdapter (private val context: Context, messages: ArrayList<Any>):Re
     override fun getItemViewType(position: Int): Int {
         val message = messages.get(position)
 
-        return if( message.user=="moi" ) {
+//        getUserName(ConversationActivity)
+
+        return if( message.user=="moi" || message.user=="Miha"  || message.user=="Liva"  || message.user=="Ambinina") {
             VIEW_TYPE_MY_MESSAGE
         }
         else {
@@ -77,15 +87,15 @@ class MessageAdapter (private val context: Context, messages: ArrayList<Any>):Re
 
     inner class MyMessageViewHolder (view: View) : MessageViewHolder(view) {
         private var messageText: TextView = view.txtMyMessage
+        private var userText: TextView = view.userPseudo
         private var timeText: TextView = view.txtMyMessageTime
 
         override fun bind(message: Message) {
             messageText.text = message.message
+            userText.text = message.user
             timeText.text = DateUtils.fromMillisToTimeString(message.time)
 
         }
-
-
     }
 
     inner class BotMessageViewHolder (view: View) : MessageViewHolder(view) {

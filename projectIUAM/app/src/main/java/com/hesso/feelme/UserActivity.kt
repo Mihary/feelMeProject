@@ -15,6 +15,7 @@ class UserActivity : AppCompatActivity() {
     lateinit var name: EditText
     lateinit var age: EditText
     lateinit var email: EditText
+    lateinit var nomDeBot: EditText
     lateinit var userNameTitle: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +28,7 @@ class UserActivity : AppCompatActivity() {
         name = findViewById(R.id.name) as EditText
         age = findViewById(R.id.age) as EditText
         email = findViewById(R.id.email) as EditText
+        nomDeBot = findViewById(R.id.nomDeBot) as EditText
         sex = findViewById(R.id.sex) as Spinner
         val cancelInfo = findViewById(R.id.cancelInfo) as Button
         val saveInfo = findViewById(R.id.saveInfo) as Button
@@ -37,6 +39,7 @@ class UserActivity : AppCompatActivity() {
         var defage = sharedPref.getString("userage", "Tape your age")
         var defemail = sharedPref.getString("useremail", "Tape your email")
         var defsex = sharedPref.getString("usersex", "Select your sex")
+        var defnomDeBots = sharedPref.getString("nomDeBot", "Bot")
 
         userNameTitle.setText(defname)
 
@@ -45,6 +48,7 @@ class UserActivity : AppCompatActivity() {
         name.setText(defname)
         age.setText(defage)
         email.setText(defemail)
+        nomDeBot.setText(defnomDeBots)
 
         sex.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listSex)
 
@@ -67,6 +71,7 @@ class UserActivity : AppCompatActivity() {
             editor.putString("username", name.text.toString())
             editor.putString("userage", age.text.toString())
             editor.putString("useremail", email.text.toString())
+            editor.putString("nomDeBot", nomDeBot.text.toString())
             editor.apply()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

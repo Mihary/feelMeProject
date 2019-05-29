@@ -72,6 +72,12 @@
                     android:hint="@string/hintUserEmail"
                     android:inputType="textEmailAddress"
             />
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/nomDeBot"
+                    android:hint="@string/nomDeBot"
+            />
             <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

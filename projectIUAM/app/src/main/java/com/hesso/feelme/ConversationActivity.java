@@ -1,5 +1,6 @@
 package com.hesso.feelme;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,6 +32,12 @@ import ai.api.model.Metadata;
 import ai.api.model.Result;
 import ai.api.model.Status;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+
 public class ConversationActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
 
     public static final String TAG = ConversationActivity.class.getName();
@@ -44,11 +51,12 @@ public class ConversationActivity extends BaseActivity implements AdapterView.On
     private MessageAdapter mAdapter;
     private TextView queryTextView;
 
-
-
-
     private AIDataService aiDataService;
     private LinearLayoutManager mLayoutManager;
+
+    private String botName;
+    private String userPseudo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +70,28 @@ public class ConversationActivity extends BaseActivity implements AdapterView.On
 
         mRecyclerView.setHasFixedSize(true);
 
+        String messageDefaut = getResources().getString(R.string.defaultMessage);
 
+        SharedPreferences sharedPref = getSharedPreferences("feelMeData", MODE_PRIVATE);
+        String stockedUserName = sharedPref.getString("username", "User");
+        String nomAmiConversation = sharedPref.getString("nomDeBot", "Bot");
 
+        if (stockedUserName != null) {
+//            Toast.makeText(this, stockedUserName, Toast.LENGTH_LONG).show();
+            userPseudo = stockedUserName;
+            botName = nomAmiConversation;
+        }else {
+            Toast.makeText(this,"Edit you information",Toast.LENGTH_LONG).show();
+            Intent myIntent = new Intent(getBaseContext(), UserActivity.class);
+            startActivity(myIntent);
+        }
 
+        userPseudo = "Miha";
         final ArrayList messages = new ArrayList<Message>();
         // Create the initial data list
         Message msg0 = new Message(
-                "Bot",
-                "hello",
+                botName,
+                messageDefaut,
                 Calendar.getInstance().getTimeInMillis());
         messages.add(msg0);
 
@@ -82,6 +104,15 @@ public class ConversationActivity extends BaseActivity implements AdapterView.On
         // contextEditText.setVisibility(View.INVISIBLE);
         queryEditText = (EditText) findViewById(R.id.txtMessage);
         queryTextView = (TextView) findViewById(R.id.txtMyMessage);
+
+        String connectionState = getConnectivityStatusString(this);
+
+         // Check connexion status
+        if(connectionState == "No internet is available") {
+            Toast.makeText(this, R.string.noConnexion, Toast.LENGTH_LONG).show();
+            Intent myIntent = new Intent(getBaseContext(), MainActivity.class);
+            startActivity(myIntent);
+        }else Toast.makeText(this, connectionState, Toast.LENGTH_LONG).show();
 
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
 
@@ -96,7 +127,7 @@ public class ConversationActivity extends BaseActivity implements AdapterView.On
                 if(!msg.equals("")) {
 
                     Message chatMessage = new Message(
-                            "moi",
+                            userPseudo,
                             msg,
                             Calendar.getInstance().getTimeInMillis());
                     //Add themessage to the list
@@ -118,25 +149,15 @@ public class ConversationActivity extends BaseActivity implements AdapterView.On
                 else {
                     Toast.makeText(getApplicationContext(), "Message should not be empty", Toast.LENGTH_SHORT).show();
                 }
-
-
-
             }
         }
 
         });
 
-
-
-        //findViewById(R.id.buttonClear).setOnClickListener(this);
-
-
-
        Spinner spinner = (Spinner) findViewById(R.id.selectLanguageSpinner);
         final ArrayAdapter<LanguageConfig> languagesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, Config.languages);
         spinner.setAdapter(languagesAdapter);
         spinner.setOnItemSelectedListener(this);
-
     }
 
     private void initService(final LanguageConfig selectedLanguage) {
@@ -161,7 +182,7 @@ public class ConversationActivity extends BaseActivity implements AdapterView.On
 
         final String queryString = String.valueOf(queryEditText.getText());
 
-        Toast.makeText(getApplicationContext(), queryString, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(), queryString, Toast.LENGTH_SHORT).show();
 
 // final String contextString = String.valueOf(contextEditText.getText());
 
@@ -211,16 +232,11 @@ final List<AIContext> contexts = Collections.singletonList(new AIContext(context
         task.execute(queryString);
     }
 
-
-
-
     private void onResult(final AIResponse response) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Log.d(TAG, "onResult");
-
-
 
 // this is example how to get different parts of result object
                 final Status status = response.getStatus();
@@ -251,7 +267,7 @@ final List<AIContext> contexts = Collections.singletonList(new AIContext(context
                 }
 
                 Message chatMessage = new Message(
-                        "Bot",
+                        botName,
                         speech,
                         Calendar.getInstance().getTimeInMillis());
                 //Add themessage to the list
@@ -260,7 +276,6 @@ final List<AIContext> contexts = Collections.singletonList(new AIContext(context
 
                 // Notify recycler view insert one new data.
                 mAdapter.notifyItemInserted(newMsgPosition);
-
 
                 // Scroll RecyclerView to the last message.
                 mRecyclerView.scrollToPosition(newMsgPosition);
@@ -276,7 +291,7 @@ final List<AIContext> contexts = Collections.singletonList(new AIContext(context
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                resultTextView.setText(error.toString());
+//                resultTextView.setText(error.toString());
             }
         });
     }
@@ -319,8 +334,24 @@ final List<AIContext> contexts = Collections.singletonList(new AIContext(context
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
-
-
-
+    public static String getConnectivityStatusString(Context context) {
+        String status = null;
+        ConnectivityManager cm = (ConnectivityManager)
+        context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork != null) {
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                status = "Wifi enabled";
+                return status;
+            } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                status = "Mobile data enabled";
+                return status;
+            }
+        } else {
+            status = "No internet is available";
+            return status;
+        }
+        return status;
+    }
 
 }
