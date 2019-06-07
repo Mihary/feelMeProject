@@ -1,10 +1,13 @@
 package com.hesso.feelme;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.util.Log;
 import android.app.Application;
 import android.content.Context;
 
 import ai.api.util.BluetoothController;
+import android.view.LayoutInflater;
 
 public class FeelMeApp extends Application {
 
@@ -84,5 +87,7 @@ public class FeelMeApp extends Application {
         }
 
     }
+
+
 
 }

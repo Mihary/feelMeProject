@@ -35,15 +35,15 @@ class UserActivity : AppCompatActivity() {
         val userNameTitle = findViewById(R.id.userNameTitle) as TextView
 
         var ssex = ""
-        var defname = sharedPref.getString("username", "Tape your name")
-        var defage = sharedPref.getString("userage", "Tape your age")
-        var defemail = sharedPref.getString("useremail", "Tape your email")
-        var defsex = sharedPref.getString("usersex", "Select your sex")
-        var defnomDeBots = sharedPref.getString("nomDeBot", "Bot")
+        var defname = sharedPref.getString("username", "")
+        var defage = sharedPref.getString("userage", "")
+        var defemail = sharedPref.getString("useremail", "")
+        var defsex = sharedPref.getString("usersex", "")
+        var defnomDeBots = sharedPref.getString("nomDeBot", "FeelBot")
 
         userNameTitle.setText(defname)
 
-        val listSex = arrayOf(defsex, "Male","Female")
+        val listSex = arrayOf(defsex, "M","F")
 
         name.setText(defname)
         age.setText(defage)

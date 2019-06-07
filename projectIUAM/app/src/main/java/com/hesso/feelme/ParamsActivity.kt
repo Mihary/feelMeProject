@@ -12,29 +12,31 @@ class ParamsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_params)
 
         val setImage = findViewById(R.id.setImage) as ImageView
-        val feelMeImage = findViewById(R.id.feelMeImage) as ImageView
+        //val feelMeImage = findViewById(R.id.feelMeImage) as ImageView
         val notifImage = findViewById(R.id.notifImage) as ImageView
-        val userImage = findViewById(R.id.userImage) as ImageView
+        //val userImage = findViewById(R.id.userImage) as ImageView
 
         setImage.setOnClickListener {
             val intent = Intent(this, PreferenceActivity::class.java)
             startActivity(intent);
 
         }
-        feelMeImage.setOnClickListener {
+        /*feelMeImage.setOnClickListener {
             val intent = Intent(this, ConversationActivity::class.java)
             startActivity(intent);
-        }
+        }*/
         notifImage.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent);
 
         }
-        userImage.setOnClickListener {
+        /*userImage.setOnClickListener {
             val intent = Intent(this, UserActivity::class.java)
             startActivity(intent);
 
-        }
+        }*/
+
+
     }
 }
 

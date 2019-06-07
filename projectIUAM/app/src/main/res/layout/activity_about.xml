@@ -22,12 +22,12 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cette application est une réalisation d'un projet sur l'interface utilisateur. Pour toute remarque sur l'application, veuillez anvoyer une message aux adresse indiquer en bas."
+            android:text="Cette application fait partie d'un projet de réalisation d'\interface utilisateur mobile. Pour toute remarque sur l'application, vous pouvez vous contacter  les développeurs: aux adresses communiquées en bas."
     />
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Une etude emotionnelle est faite pour développer cette application, mais elle n'est pas approfondie. La suggestion n'est pas parfaite. Juste pour tester la performance de l'application au début de ce développement"
+            android:text="Une etude emotionnelle est faite pour développer cette application, mais elle n'est pas approfondie. La suggestion pouvant être sujet d'amlioration pour plus tard."
     />
     <LinearLayout
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Développeur:  "
+                android:text="Développeurs:  "
         />
         <TextView
             android:layout_width="wrap_content"

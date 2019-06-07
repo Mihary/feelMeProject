@@ -4,6 +4,15 @@
       tools:context="com.hesso.feelme.MainActivity">
 
 
+
+    <item
+            android:id="@+id/action_user"
+            android:orderInCategory="200"
+            android:title="@string/btn_user"
+            android:icon="@drawable/user"
+            app:showAsAction="ifRoom" android:visible="true"/>
+
+
     <item android:id="@+id/action_settings"
           android:title="@string/action_settings"
           android:orderInCategory="100"

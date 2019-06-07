@@ -5,15 +5,17 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:background="#DFF1F8E8"
         android:weightSum="4"
-        tools:context=".ParamsActivity">
+        tools:context=".ParamsActivity" android:orientation="vertical"
+       >
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
+
     >
         <TextView
                 android:layout_width="wrap_content"
@@ -23,153 +25,80 @@
                 android:layout_centerInParent="true"
         />
     </RelativeLayout>
+
     <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:layout_weight="2"
-            android:columnCount="2"
+            android:columnCount="1"
             android:rowCount="2"
             android:alignmentMode="alignMargins"
             android:columnOrderPreserved="false"
             android:padding="30dp"
-    >
-        <android.support.v7.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:layout_margin="4dp"
-                android:elevation="8dp"
+            android:background="@color/cardview_light_background"
+            android:layout_gravity="center" android:elevation="0dp">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/reglageParams"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_gravity="center_horizontal|center_vertical"
         >
-            <LinearLayout
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/useractivity"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:id="@+id/setImage" android:layout_marginTop="20dp"/>
+            <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/reglageParams"
-                    android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:layout_gravity="center_horizontal|center_vertical"
-            >
-                <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/setting"
-                        android:layout_centerInParent="true"
-                        android:layout_gravity="center"
-                        android:id="@+id/setImage"
-                />
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/btn_preference"
-                        android:textSize="20dp"
-                        android:layout_centerInParent="true"
-                />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:layout_margin="4dp"
-                android:elevation="8dp"
+                    android:text="@string/btn_preference"
+                    android:textSize="20dp"
+                    android:gravity="center|center_horizontal|center_vertical" android:layout_gravity="center"
+                    android:layout_marginTop="10dp"/>
+        </LinearLayout>
+
+
+        <View
+                android:layout_width="200dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_height="2dp"
+                android:id="@+id/vio"
+                android:background="@color/colorPrimaryDark"
+                android:layout_marginTop="70dp"/>
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/notificationParams"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_gravity="center_horizontal|center_vertical"
         >
-            <LinearLayout
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/reglage"
+                    android:layout_gravity="center"
+                    android:id="@+id/notifImage"
+                    app:srcCompat="@drawable/reglage"
+                    tools:srcCompat="@drawable/reglage"/>
+            <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/userParams"
-                    android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:layout_gravity="center_horizontal|center_vertical"
-            >
-                <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/face"
-                        android:layout_centerInParent="true"
-                        android:layout_gravity="center"
-                        android:id="@+id/userImage"
-                />
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/btn_user"
-                        android:textSize="20dp"
-                        android:layout_centerInParent="true"
-                        android:id="@+id/user"
-                />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:layout_margin="4dp"
-                android:elevation="8dp"
-        >
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/notificationParams"
-                    android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:layout_gravity="center_horizontal|center_vertical"
-            >
-                <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/notif"
-                        android:layout_gravity="center"
-                        android:layout_centerInParent="true"
-                        android:id="@+id/notifImage"
-                />
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/btn_user"
-                        android:textSize="20dp"
-                        android:layout_centerInParent="true"
-                />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
-                android:layout_margin="4dp"
-                android:elevation="8dp"
-        >
-            <LinearLayout
-                    android:id="@+id/feelMeParams"
-                    android:clickable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center_horizontal|center_vertical"
-            >
-                <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/logo_1"
-                        android:layout_centerInParent="true"
-                        android:layout_gravity="center"
-                        android:id="@+id/feelMeImage"
-                />
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/btn_feelMe"
-                        android:textSize="20dp"
-                        android:layout_centerInParent="true"
-                />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+                    android:text="@string/btn_setting"
+                    android:textSize="20dp"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center" android:paddingTop="10dp"/>
+        </LinearLayout>
+
 
     </GridLayout>
+
 </LinearLayout>

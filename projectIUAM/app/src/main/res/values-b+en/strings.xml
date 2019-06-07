@@ -1,81 +1,83 @@
 <resources>
     <string name="app_name">feelMe</string>
     <string name="action_settings" translatable="true">Settings</string>
-    <string name="non_empty_query" translatable="true">Tape your text, please.</string>
+    <string name="non_empty_query" translatable="true">Enter     text, please.</string>
     <string name="MessageVocalGuide">Speak please...</string>
     <string name="btn_send">Send</string>
     <string name="btn_speak">Speak</string>
-    <string name="btn_preference">Preference</string>
-    <string name="btn_user">User</string>
+    <string name="btn_preference">User Activities</string>
+    <string name="btn_user">User Infos</string>
     <string name="btn_Notification">Notification</string>
     <string name="btn_feelMe">Feelme</string>
     <string name="btn_preCancel">Cancel</string>
     <string name="btn_userSave">Save</string>
-    <string name="label_params">Parametres</string>
+    <string name="label_params">Parameters</string>
     <string name="message_no_connexion">Connection not available</string>
     <string name="message_connexion">Connection established</string>
-    <string name="tapeMessage">Tape your message...</string>
+    <string name="tapeMessage">Tape     message...</string>
     <string name="hintuserName">Name</string>
     <string name="hintUserSex">Sex</string>
     <string name="hintUserEmail">Email</string>
     <string name="hintUserAge">Age</string>
     <string name="titlePersonalInfo">Personal Information</string>
+    <string name="language_setting">Language</string>
+    <string name="btn_setting">App Settings</string>
 
 
     <string name="pref11">Normal</string>
     <string name="pref12">Handicap</string>
     <string name="pref13">Athletic</string>
-    <string name="pref14">Pregnant</string>
+    <string name="pref14">Healthy</string>
     <string name="pref15">Mental illness</string>
     <string name="pref16">Permanent sick</string>
 
     <string name="pref21">Play billard</string>
     <string name="pref22">play soccer-table</string>
     <string name="pref23">Play ping pong</string>
-    <string name="pref24">Take a party of self workout</string>
-    <string name="pref25">Take your book and take a time to read it</string>
+    <string name="pref24"> party of self workout</string>
+    <string name="pref25">Reading</string>
 
-    <string name="pref31">Vas faire une petite ballade</string>
-    <string name="pref32">Prendre un temps de reflexion au bord de l\'eau n\'est pas mal</string>
-    <string name="pref33">Go to the casino</string>
-    <string name="pref34">Go to your yoga</string>
-    <string name="pref35">Go to the church and pray</string>
-    <string name="pref36">Go to the library</string>
+    <string name="pref31">Picnic</string>
+    <string name="pref32">Beach</string>
+    <string name="pref33">Casino</string>
+    <string name="pref34">  yoga</string>
+    <string name="pref35"> the church and pray</string>
+    <string name="pref36"> the library</string>
 
     <string name="pref41">Play basket ball</string>
     <string name="pref42">Play football</string>
     <string name="pref43">Play volley ball</string>
     <string name="pref44">Play handball</string>
-    <string name="pref45">Take a pool party</string>
+    <string name="pref45"> pool party</string>
     <string name="pref46">Play tennis</string>
-    <string name="pref47">Go to the your zumba club</string>
-    <string name="pref48">A rock party is not bad., then go.</string>
-    <string name="pref49">Try to take drift party</string>
-    <string name="pref40">Take a time for a karting</string>
+    <string name="pref47">   zumba </string>
+    <string name="pref48">A rock party </string>
+    <string name="pref49"> drift party</string>
+    <string name="pref40"> karting</string>
 
     <string name="pref51">Game party?</string>
-    <string name="pref52">Try to find a game on the web and play a party.</string>
-    <string name="pref53">Try to have conversation with your love</string>
+    <string name="pref52">  find a game on the web and play a party.</string>
+    <string name="pref53"> have conversation with  love</string>
 
     <string name="pref61">Drink a glass of water</string>
-    <string name="pref62">Take a minute to go out</string>
+    <string name="pref62">        minute to go out</string>
     <string name="pref63">You have to sleep.</string>
-    <string name="pref64">Take a break</string>
-    <string name="pref65">Consult a doctor</string>
-    <string name="pref66">Go to bed</string>
-    <string name="pref67">Try to cook something</string>
-    <string name="pref68">Try to have conversation with your friend on social network</string>
-    <string name="pref69">Take a cup of coffee</string>
-    <string name="pref60">Take a beer</string>
-    <string name="pref601">Take a glass of whisky</string>
+    <string name="pref64">        break</string>
+    <string name="pref65">doctor</string>
+    <string name="pref66">   bed</string>
+    <string name="pref67"> cook something</string>
+    <string name="pref68"> social network</string>
+    <string name="pref69">coffee Drink</string>
+    <string name="pref60">  beer</string>
+    <string name="pref601">  glass of whisky</string>
     <string name="action_confidentiality">Confidentiality</string>
-    <string name="conditionTitle">About your personal informations</string>
+    <string name="conditionTitle">personal informations</string>
     <string name="conditionSwitch">I accept</string>
     <string name="action_about">About</string>
     <string name="nomDeBot">Prefered bot name</string>
-    <string name="defaultMessage">Hello, I am a good friend for you. Do not hesitate to trust on me.</string>
+    <string name="defaultMessage">Hello, I am     bot friend, How are you today ?</string>
     <string name="editMessageHint">Enter message</string>
     <string name="acceptCondition">You have to accept condition to use conversation</string>
     <string name="noConnexion">Please connect to the internet</string>
-    <string name="conditionText">This application use your personal data only for you. All your data are saved inside your device...</string>
+    <string name="conditionText">This application use     personal data only for you. All     data are saved inside     device...</string>
 </resources>

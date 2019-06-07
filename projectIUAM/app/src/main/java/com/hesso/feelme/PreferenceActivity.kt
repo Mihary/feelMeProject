@@ -30,7 +30,7 @@ class PreferenceActivity : AppCompatActivity() {
         pref3 = findViewById(R.id.pref3) as Spinner
         pref4 = findViewById(R.id.pref4) as Spinner
         pref5 = findViewById(R.id.pref5) as Spinner
-        pref6 = findViewById(R.id.pref6) as Spinner
+        //pref6 = findViewById(R.id.pref6) as Spinner
 
         val cancelPref = findViewById(R.id.cancelPref) as Button
 
@@ -81,12 +81,12 @@ class PreferenceActivity : AppCompatActivity() {
         val pref63: String  = getString(R.string.pref63)
         val pref64: String  = getString(R.string.pref64)
         val pref65: String  = getString(R.string.pref65)
-        val pref66: String  = getString(R.string.pref66)
+        /*val pref66: String  = getString(R.string.pref66)
         val pref67: String  = getString(R.string.pref67)
         val pref68: String  = getString(R.string.pref68)
         val pref69: String  = getString(R.string.pref69)
         val pref60: String  = getString(R.string.pref60)
-        val pref601: String  = getString(R.string.pref601)
+        val pref601: String  = getString(R.string.pref601)*/
 
 
         val listPref1 = arrayOf(defpref1,pref11,pref12,pref13,pref14,pref15,pref16)
@@ -94,7 +94,7 @@ class PreferenceActivity : AppCompatActivity() {
         val listPref3 = arrayOf<String>(defpref3,pref31,pref32,pref33,pref34,pref35,pref36)
         val listPref4 = arrayOf<String>(defpref4,pref41,pref42,pref43,pref44,pref45,pref46,pref47,pref48,pref49,pref40)
         val listPref5 = arrayOf<String>(defpref5,pref51,pref52,pref53)
-        val listPref6 = arrayOf<String>(defpref6,pref61,pref62,pref63,pref64,pref65,pref66,pref67,pref68,pref69,pref60,pref601)
+        //val listPref6 = arrayOf<String>(defpref6,pref61,pref62,pref63,pref64,pref65,pref66,pref67,pref68,pref69,pref60,pref601)
 
 
 
@@ -103,7 +103,7 @@ class PreferenceActivity : AppCompatActivity() {
         pref3.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listPref3)
         pref4.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listPref4)
         pref5.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listPref5)
-        pref6.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listPref6)
+       // pref6.adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listPref6)
 
         pref1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             var spref1 = ""
@@ -168,7 +168,7 @@ class PreferenceActivity : AppCompatActivity() {
             }
         }
 
-        pref6.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+       /* pref6.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             var spref6 = ""
             override fun onNothingSelected(parent: AdapterView<*>?) {
 //                spinresult.text = ""
@@ -178,7 +178,7 @@ class PreferenceActivity : AppCompatActivity() {
                 editor.putString("pref6",spref6)
                 editor.apply()
             }
-        }
+        }*/
 
         cancelPref.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

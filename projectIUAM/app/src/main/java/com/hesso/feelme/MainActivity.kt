@@ -23,10 +23,16 @@ class MainActivity : AppCompatActivity() {
 
         val confidState: String = getValueString("confid").toString()
 
+
         startFeel.setOnClickListener(){
             val sharedPref = getSharedPreferences("feelMeData", Context.MODE_PRIVATE)
+            //notification preferences
+            val switchPref = sharedPref.getBoolean(SettingsActivity.KEY_PREF_NOTIF_SWITCH,true)
+            Toast.makeText(this, switchPref.toString(),
+                Toast.LENGTH_SHORT).show()
+            val langPref = sharedPref.getString(SettingsActivity.KEY_PREF_LANGUE,"FR")
+
             val editor = sharedPref.edit()
-            val confidState: String = getValueString("confid").toString()
             if(confidState=="OK"){
 //                Toast.makeText(this,confidState, Context.MODE_PRIVATE).show()
                 val intent = Intent(this, ConversationActivity::class.java)
@@ -37,6 +43,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent);
             }
         }
+
+        android.support.v7.preference.PreferenceManager
+            .setDefaultValues(this, R.xml.preferences, false);
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -57,6 +67,13 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
+            R.id.action_user -> {
+            val intent = Intent(this, UserActivity::class.java)
+            startActivity(intent)
+//                Toast.makeText(this, "Compte utilisateur", Toast.LENGTH_LONG).show()
+            true
+        }
+
             R.id.action_settings -> {
                 val intent = Intent(this, ParamsActivity::class.java)
                 startActivity(intent)
